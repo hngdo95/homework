@@ -24,14 +24,14 @@ class Items(Base):
     item_price=relationship('Bid')
 class User(Base):
     __tablename__ = 'user'
-    id = Column("id",Integer, primary_key=True, autoincrement=True)
+    id = Column(Integer, primary_key=True, autoincrement=True)
     username = Column(String(250), nullable=False)
     password = Column(String(250), nullable=False)
     user_item = relationship('item')  # one to many
     item_bid = relationship("item_bid", secondary=association_table, back_populates="user_price")  # many to many
 class Bid(Base):
     __tablename__ = 'bid'
-    id = Column("id",Integer, primary_key=True, autoincrement=True)
+    id = Column(Integer, primary_key=True, autoincrement=True)
     price=Column(Float,nullable=False)
     item_id=Column(Integer,ForeignKey('item.id'))
     user_price = relationship("user_price", secondary=association_table, back_populates="item_bid")
